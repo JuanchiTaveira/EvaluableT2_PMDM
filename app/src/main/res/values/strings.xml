@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EvaluableT2</string>
+    <string-array name="categorias">
+        <item>Todo</item>
+        <item>Cocina</item>
+        <item>Informatica</item>
+        <item>Muebles</item>
+    </string-array>
 </resources>
