@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+    <ImageView
+            android:src="@drawable/carrito_chico"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imagen_fila"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:text="TITULO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titulo_fila"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/imagen_fila"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp" />
+
+    <TextView
+            android:text="9999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/precio_fila"
+            app:layout_constraintStart_toStartOf="@+id/titulo_fila"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_fila"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp" />
+
+    <Button
+            android:text="Añadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_aniadir"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imagen_fila" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+</androidx.constraintlayout.widget.ConstraintLayout>
