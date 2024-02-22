@@ -39,7 +39,7 @@
             android:text="Añadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_aniadir"
+            android:id="@+id/btn_aniadir_fila"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/imagen_fila" />

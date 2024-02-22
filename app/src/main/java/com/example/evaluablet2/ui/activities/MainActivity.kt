@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.adapter.ProductAdapter
 import com.example.evaluablet2.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+import java.util.function.Predicate
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
-    private var listaTestProductos: ArrayList<Product> = ArrayList()
+    private val listaTestProductos: ArrayList<Product> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +26,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // lista para testear el recyclerView
-        listaTestProductos.add(Product(1, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Samsung Universe 9", 1249, "smartphones"));
-        listaTestProductos.add(Product(2, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Samsung Universe 10", 999, "smartphones"));
-        listaTestProductos.add(Product(3, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Samsung Universe 9", 1444, "smartphones"));
+        listaTestProductos.add(Product(1, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Samsung Universe 9", 1249, "Informatica"));
+        listaTestProductos.add(Product(2, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Microondas Sony", 999, "Cocina"));
+        listaTestProductos.add(Product(3, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Cama matrimonial", 1444, "Muebles"));
 
         productAdapter = ProductAdapter(listaTestProductos, this)
         binding.reciclerProductos.adapter = productAdapter
         binding.reciclerProductos.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
+        binding.spinnerCategoria.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val categoria = parent!!.adapter.getItem(position).toString()
+
+                if (categoria.equals("Todo")) {
+                    productAdapter.lista = listaTestProductos
+                } else {
+                    productAdapter.lista = listaTestProductos.filter { product -> product.category.equals(categoria, true) }.toList()
+                }
+
+                Snackbar.make(binding.root, categoria, Snackbar.LENGTH_SHORT).show()
+
+                productAdapter.notifyDataSetChanged()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
     }
 }

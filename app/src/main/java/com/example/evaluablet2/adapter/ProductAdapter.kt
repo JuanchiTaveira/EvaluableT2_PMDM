@@ -24,7 +24,7 @@ class ProductAdapter(var lista: List<Product>, var context: Context): RecyclerVi
             imagen = item.findViewById(R.id.imagen_fila)
             titulo = item.findViewById(R.id.titulo_fila)
             precio = item.findViewById(R.id.precio_fila)
-            btnAniadir = item.findViewById(R.id.btn_aniadir)
+            btnAniadir = item.findViewById(R.id.btn_aniadir_fila)
         }
     }
 
