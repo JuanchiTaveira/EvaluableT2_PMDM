@@ -43,19 +43,12 @@ class MainActivity : AppCompatActivity() {
             ) {
                 val categoria = parent!!.adapter.getItem(position).toString()
 
-                if (categoria.equals("Todo")) {
-                    productAdapter.lista = listaTestProductos
-                } else {
-                    productAdapter.lista = listaTestProductos.filter { product -> product.category.equals(categoria, true) }.toList()
-                }
+                productAdapter.filtrarProductos(categoria)
 
                 Snackbar.make(binding.root, categoria, Snackbar.LENGTH_SHORT).show()
-
-                productAdapter.notifyDataSetChanged()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }

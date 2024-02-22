@@ -10,8 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.R
+import com.google.android.material.snackbar.Snackbar
 
 class ProductAdapter(var lista: List<Product>, var context: Context): RecyclerView.Adapter<ProductAdapter.MyHolder>() {
+
+    private var listaCompleta: List<Product> = lista
 
     class MyHolder(item: View): RecyclerView.ViewHolder(item) {
 
@@ -44,5 +47,15 @@ class ProductAdapter(var lista: List<Product>, var context: Context): RecyclerVi
         holder.imagen.setImageResource(R.drawable.carrito_chico)
         holder.titulo.text = product.title
         holder.precio.text = product.price.toString() + " EUR"
+    }
+
+    fun filtrarProductos(categoria: String) {
+        if (categoria.equals("Todo")) {
+            lista = listaCompleta
+        } else {
+            lista = listaCompleta.filter { product -> product.category.equals(categoria, true) }.toList()
+        }
+
+        notifyDataSetChanged()
     }
 }
