@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.adapter.ProductAdapter
 import com.example.evaluablet2.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
-import java.util.function.Predicate
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,21 +30,21 @@ class MainActivity : AppCompatActivity() {
         listaTestProductos.add(Product(3, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Cama matrimonial", 1444, "Muebles"));
 
         productAdapter = ProductAdapter(listaTestProductos, this)
-        binding.reciclerProductos.adapter = productAdapter
-        binding.reciclerProductos.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        binding.reciclerProducts.adapter = productAdapter
+        binding.reciclerProducts.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
-        binding.spinnerCategoria.onItemSelectedListener = object : OnItemSelectedListener {
+        binding.spinnerCategories.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                val categoria = parent!!.adapter.getItem(position).toString()
+                val category = parent!!.adapter.getItem(position).toString()
 
-                productAdapter.filtrarProductos(categoria)
+                productAdapter.filtrarProductos(category)
 
-                Snackbar.make(binding.root, categoria, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, category, Snackbar.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
