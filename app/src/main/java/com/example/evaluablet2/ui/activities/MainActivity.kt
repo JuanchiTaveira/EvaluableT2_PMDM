@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
     private val completeProductList: ArrayList<Product> = ArrayList()
+    private var cart: ArrayList<Product> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                 val category = parent!!.adapter.getItem(position).toString()
 
                 productAdapter.filterProducts(category)
+                
+                updateCartCount()
 
                 Snackbar.make(binding.root, category, Snackbar.LENGTH_SHORT).show()
             }
@@ -54,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         fillCategorySpinner()
+    }
+
+    private fun updateCartCount() {
+        binding.tvCart.text = "(" + cart.size + ")"
     }
 
     fun fillCategorySpinner() {
