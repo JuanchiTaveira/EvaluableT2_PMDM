@@ -15,9 +15,9 @@ import com.bumptech.glide.Glide
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.R
 
-class ProductAdapter(var filteredList: List<Product>, var context: Context): RecyclerView.Adapter<ProductAdapter.MyHolder>() {
+class ProductAdapter(var completeProductList: List<Product>, var context: Context): RecyclerView.Adapter<ProductAdapter.MyHolder>() {
 
-    private var completeList: List<Product> = filteredList
+    private var filteredList: List<Product> = completeProductList
 
     class MyHolder(item: View): RecyclerView.ViewHolder(item) {
 
@@ -54,9 +54,9 @@ class ProductAdapter(var filteredList: List<Product>, var context: Context): Rec
 
     fun filterProducts(category: String) {
         if (category.equals("Todo")) {
-            filteredList = completeList
+            filteredList = completeProductList
         } else {
-            filteredList = completeList.filter { product -> product.category.equals(category, true) }.toList()
+            filteredList = completeProductList.filter { product -> product.category.equals(category, true) }.toList()
         }
 
         notifyDataSetChanged()
