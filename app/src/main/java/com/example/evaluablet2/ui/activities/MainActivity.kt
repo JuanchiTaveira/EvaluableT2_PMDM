@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             null,
             Response.Listener<JSONArray> { response ->
                 for (i in 0 until response.length()) {
-                    categories.add(response.getString(i))
+                    categories.add(response.getString(i).capitalize())
                 }
 
                 val adapter = ArrayAdapter(
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                     android.R.layout.simple_spinner_item,
                     categories
                 )
+
                 binding.spinnerCategories.adapter = adapter
             },
             null
