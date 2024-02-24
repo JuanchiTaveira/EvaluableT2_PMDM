@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.JsonObjectRequest
+import com.bumptech.glide.Glide
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.R
 
@@ -46,7 +47,7 @@ class ProductAdapter(var filteredList: List<Product>, var context: Context): Rec
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val product = filteredList.get(position)
 
-        holder.image.setImageResource(R.drawable.carrito_chico)
+        Glide.with(context).load(product.images[0]).into(holder.image)
         holder.title.text = product.title
         holder.price.text = product.price.toString() + " EUR"
     }
