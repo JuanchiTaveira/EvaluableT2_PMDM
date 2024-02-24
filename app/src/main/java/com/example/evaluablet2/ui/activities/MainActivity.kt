@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Request.Method
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -25,19 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
-    private val listaTestProductos: ArrayList<Product> = ArrayList()
+    private val completeProductList: ArrayList<Product> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // lista para testear el recyclerView
-        listaTestProductos.add(Product(1, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Samsung Universe 9", 1249, "Informatica"));
-        listaTestProductos.add(Product(2, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Microondas Sony", 999, "Cocina"));
-        listaTestProductos.add(Product(3, listOf("https://cdn.dummyjson.com/product-images/1/1.jpg"), "Cama matrimonial", 1444, "Muebles"));
+        fillProductList()
 
-        productAdapter = ProductAdapter(listaTestProductos, this)
+        productAdapter = ProductAdapter(completeProductList, this)
         binding.reciclerProducts.adapter = productAdapter
         binding.reciclerProducts.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
 
@@ -50,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 val category = parent!!.adapter.getItem(position).toString()
 
-                productAdapter.filtrarProductos(category)
+                productAdapter.filterProducts(category)
 
                 Snackbar.make(binding.root, category, Snackbar.LENGTH_SHORT).show()
             }
@@ -68,7 +63,10 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET,
             "https://dummyjson.com/products/categories",
             null,
-            Response.Listener<JSONArray> { response ->
+            { response ->
+
+                categories.add("Todo")
+
                 for (i in 0 until response.length()) {
                     categories.add(response.getString(i).capitalize())
                 }
@@ -85,5 +83,36 @@ class MainActivity : AppCompatActivity() {
         )
 
         Volley.newRequestQueue(applicationContext).add(jsonArrayRequest)
+    }
+
+    fun fillProductList() {
+        val productRequest = JsonObjectRequest(
+            Request.Method.GET, "https://dummyjson.com/products", null,
+            { response ->
+                val allProducts = response.getJSONArray("products")
+
+                for (i in 0 until allProducts.length()) {
+                    val actualProduct: JSONObject = allProducts.get(i) as JSONObject
+
+                    val id: Int = actualProduct.getInt("id")
+                    val imagesJson: JSONArray = actualProduct.getJSONArray("images")
+                    val images: ArrayList<String> = ArrayList()
+
+                    for (j in 0 until imagesJson.length()) {
+                        images.add(imagesJson[j].toString())
+                    }
+
+                    val title: String = actualProduct.getString("title")
+                    val price: Int = actualProduct.getInt("price")
+                    val category: String = actualProduct.getString("category")
+
+                    completeProductList.add(Product(id, images, title, price, category))
+                }
+
+            },
+            null
+        )
+
+        Volley.newRequestQueue(applicationContext).add(productRequest)
     }
 }

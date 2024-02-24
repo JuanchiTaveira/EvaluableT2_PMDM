@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response.Listener
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.R
 
@@ -48,11 +51,11 @@ class ProductAdapter(var filteredList: List<Product>, var context: Context): Rec
         holder.price.text = product.price.toString() + " EUR"
     }
 
-    fun filtrarProductos(categoria: String) {
-        if (categoria.equals("Todo")) {
+    fun filterProducts(category: String) {
+        if (category.equals("Todo")) {
             filteredList = completeList
         } else {
-            filteredList = completeList.filter { product -> product.category.equals(categoria, true) }.toList()
+            filteredList = completeList.filter { product -> product.category.equals(category, true) }.toList()
         }
 
         notifyDataSetChanged()
