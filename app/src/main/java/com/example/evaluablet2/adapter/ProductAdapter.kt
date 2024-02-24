@@ -18,6 +18,11 @@ import com.example.evaluablet2.R
 class ProductAdapter(var completeProductList: List<Product>, var context: Context): RecyclerView.Adapter<ProductAdapter.MyHolder>() {
 
     private var filteredList: List<Product> = completeProductList
+    private lateinit var listener: OnBtnAddToCartListener
+
+    init {
+        listener = context as OnBtnAddToCartListener
+    }
 
     class MyHolder(item: View): RecyclerView.ViewHolder(item) {
 
@@ -50,6 +55,10 @@ class ProductAdapter(var completeProductList: List<Product>, var context: Contex
         Glide.with(context).load(product.images[0]).into(holder.image)
         holder.title.text = product.title
         holder.price.text = product.price.toString() + " EUR"
+
+        holder.btnAddToCart.setOnClickListener {
+            listener.addToCart(product)
+        }
     }
 
     fun filterProducts(category: String) {
@@ -60,5 +69,9 @@ class ProductAdapter(var completeProductList: List<Product>, var context: Contex
         }
 
         notifyDataSetChanged()
+    }
+
+    interface OnBtnAddToCartListener {
+        fun addToCart(product: Product)
     }
 }

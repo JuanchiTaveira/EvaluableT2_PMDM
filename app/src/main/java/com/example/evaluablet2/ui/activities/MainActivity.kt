@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.json.JSONArray
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProductAdapter.OnBtnAddToCartListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var productAdapter: ProductAdapter
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         fillProductList()
+        updateCartCount()
 
         productAdapter = ProductAdapter(completeProductList, this)
         binding.reciclerProducts.adapter = productAdapter
@@ -47,10 +48,6 @@ class MainActivity : AppCompatActivity() {
                 val category = parent!!.adapter.getItem(position).toString()
 
                 productAdapter.filterProducts(category)
-                
-                updateCartCount()
-
-                Snackbar.make(binding.root, category, Snackbar.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -121,5 +118,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         Volley.newRequestQueue(applicationContext).add(productRequest)
+    }
+
+    override fun addToCart(product: Product) {
+        cart.add(product)
+        Snackbar.make(binding.root, "${product.title} añadido al carrito", Snackbar.LENGTH_SHORT).show()
+        updateCartCount()
     }
 }
