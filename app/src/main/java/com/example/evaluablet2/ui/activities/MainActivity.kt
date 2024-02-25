@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnBtnAddToCartListener 
 
         binding.btnCart.setOnClickListener {
             val intent = Intent(applicationContext, SecondActivity::class.java)
+            intent.putExtra("cartProducts", cart)
             startActivity(intent)
         }
 
