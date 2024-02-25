@@ -1,5 +1,6 @@
 package com.example.evaluablet2.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -51,6 +52,11 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnBtnAddToCartListener 
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        binding.btnCart.setOnClickListener {
+            val intent = Intent(applicationContext, SecondActivity::class.java)
+            startActivity(intent)
         }
 
         fillCategorySpinner()

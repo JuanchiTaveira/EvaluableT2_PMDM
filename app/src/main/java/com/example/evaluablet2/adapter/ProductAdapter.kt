@@ -18,7 +18,7 @@ import com.example.evaluablet2.R
 class ProductAdapter(var completeProductList: List<Product>, var context: Context): RecyclerView.Adapter<ProductAdapter.MyHolder>() {
 
     private var filteredList: List<Product> = completeProductList
-    private lateinit var listener: OnBtnAddToCartListener
+    private var listener: OnBtnAddToCartListener
 
     init {
         listener = context as OnBtnAddToCartListener
