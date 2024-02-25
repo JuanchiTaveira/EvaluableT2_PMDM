@@ -52,13 +52,14 @@ class CartAdapter(var products: ArrayList<Product>, var context: Context) : Recy
         holder.price.text = product.price.toString() + " EUR"
 
         holder.btnRemove.setOnClickListener {
-            listener.removeFromCart(product)
+            listener.removeFromCart(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, products.size - position)
         }
     }
 
     interface OnRemoveFromCartListener {
-        fun removeFromCart(product: Product)
+        fun removeFromCart(position: Int)
     }
 
 }
