@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+    <ImageView
+            android:src="@drawable/carrito_chico"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/row_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:text="TITULO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/row_title"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/row_image"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp" />
+
+    <TextView
+            android:text="9999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/row_price"
+            app:layout_constraintStart_toStartOf="@+id/row_title"
+            app:layout_constraintTop_toBottomOf="@+id/row_title"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp" />
+
+    <Button
+            android:text="X"
+            android:layout_width="30dp"
+            android:layout_height="37dp"
+            android:id="@+id/btn_remove_row"
+            android:padding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="#C31A1A"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
