@@ -1,5 +1,6 @@
 package com.example.evaluablet2.ui.activities
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnBtnAddToCartListener 
         binding.btnCart.setOnClickListener {
             val intent = Intent(applicationContext, SecondActivity::class.java)
             intent.putExtra("cartProducts", cart)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
 
         fillCategorySpinner()
@@ -131,5 +132,13 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnBtnAddToCartListener 
         cart.add(product)
         Snackbar.make(binding.root, "${product.title} añadido al carrito", Snackbar.LENGTH_SHORT).show()
         updateCartCount()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            cart = data!!.getSerializableExtra("cartProducts") as ArrayList<Product>
+            updateCartCount()
+        }
     }
 }

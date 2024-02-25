@@ -1,5 +1,7 @@
 package com.example.evaluablet2.ui.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,5 +51,12 @@ class SecondActivity: AppCompatActivity(), CartAdapter.OnRemoveFromCartListener 
         cart.forEach { product -> total += product.price }
         binding.tvTotal.text = "Total: ${total} EUR"
         return total
+    }
+
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("cartProducts", cart)
+        setResult(Activity.RESULT_OK, resultIntent)
+        super.onBackPressed()
     }
 }

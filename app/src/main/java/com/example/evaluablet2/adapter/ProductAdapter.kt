@@ -8,9 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response.Listener
-import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
 import com.example.evaluablet2.Product
 import com.example.evaluablet2.R
