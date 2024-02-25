@@ -33,6 +33,10 @@ class SecondActivity: AppCompatActivity(), CartAdapter.OnRemoveFromCartListener 
             Snackbar.make(binding.root, "Carrito vaciado", Snackbar.LENGTH_SHORT).show()
         }
 
+        binding.btnBuy.setOnClickListener {
+            Snackbar.make(binding.root, "Enhorabuena, compra por valor de ${setTvTotal()} EUR realizada", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun removeFromCart(position: Int) {
